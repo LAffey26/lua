@@ -29,7 +29,7 @@ keymap.set("n", "<leader>q", ":q!<CR>", { desc = "Exiting the nvim editor" })
 keymap.set("n", "<leader>r", ":RunCode<CR>i", { desc = "Code runnder" })
 keymap.set("n", "<leader>a", "gg0vG<S-$>")
 keymap.set("n", "<leader>8", ":lua vim.lsp.stop_client(vim.lsp.get_active_clients())<CR>",{desc="Stop lsp client"})
-keymap.set("n", "<leader>9", ":LspRestart<CR>",{desc="Stop lsp client"})
+keymap.set("n", "<leader>9", ":LspRestart<CR>",{desc="Restart lsp client"})
 -- LaTeX
 -- zathura
 keymap.set("n", "<leader>l", function()

@@ -22,6 +22,17 @@ return {
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
     end
 
+    lspconfig["clangd"].setup({
+      capabilities = default,
+      on_attach = function(client, bufnr)
+        -- Пример настройки привязок клавиш при подключении
+        local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+        buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', { noremap=true, silent=true })
+        buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', { noremap=true, silent=true })
+        buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', { noremap=true, silent=true })
+      end,
+    })
+
     -- -- configure html server
     -- lspconfig["html"].setup({
     --   capabilities = default,
@@ -37,7 +48,6 @@ return {
     --   capabilities = default,
     --   filetypes = { "html", "typescriptreact", "javascriptreact" }, -- , "css", "sass", "scss", "less", "svelte"
     -- })
-
     -- configure python server
     lspconfig["pyright"].setup({
       capabilities = default,

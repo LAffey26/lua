@@ -54,6 +54,7 @@ return {
         "pylint",   -- python linter
         -- "eslint_d", -- js linter
       },
+    opts = { ensure_installed = { "prettier" } }
     })
   end,
 }

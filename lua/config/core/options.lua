@@ -10,7 +10,6 @@ opt.shiftwidth = 2
 opt.expandtab = true
 opt.autoindent = true
 
-
 -- line wrapping
 opt.wrap = false
 
@@ -38,5 +37,3 @@ opt.splitbelow = true
 
 -- turn off swapfile
 opt.swapfile = false
-
-vim.cmd[[g:vimtex_quickfix_mode = 0]]

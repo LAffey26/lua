@@ -3,7 +3,6 @@ vim.g.mapleader = " "
 local keymap = vim.keymap
 
 --General keymaps
-
 keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode" })
 
 --tubs
@@ -26,15 +25,26 @@ keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "Find str
 keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights" })
 keymap.set("n", "<leader>w", ":w<CR>", { desc = "Saving  file changes" })
 keymap.set("n", "<leader>q", ":q!<CR>", { desc = "Exiting the nvim editor" })
-keymap.set("n", "<leader>r", ":RunCode<CR>i", { desc = "Code runnder" })
+-- keymap.set("n", "<leader>r", ":RunCode<CR>i", { desc = "Code runnder" })
 keymap.set("n", "<leader>a", "gg0vG<S-$>")
-keymap.set("n", "<leader>8", ":lua vim.lsp.stop_client(vim.lsp.get_active_clients())<CR>",{desc="Stop lsp client"})
-keymap.set("n", "<leader>9", ":LspRestart<CR>",{desc="Restart lsp client"})
+keymap.set("n", "<leader>8", ":lua vim.lsp.stop_client(vim.lsp.get_active_clients())<CR>", { desc = "Stop lsp client" })
+keymap.set("n", "<leader>9", ":LspRestart<CR>", { desc = "Restart lsp client" })
 -- LaTeX
 -- zathura
 keymap.set("n", "<leader>l", function()
-  local filepath = vim.fn.expand('%:r') .. ".pdf"
-  local cmd = string.format("zathura %s &", filepath)
-  vim.cmd("silent !" .. cmd)
+	local filepath = vim.fn.expand("%:r") .. ".pdf"
+	local cmd = string.format("zathura %s &", filepath)
+	vim.cmd("silent !" .. cmd)
 end, { desc = "zathura staring file PDF" })
-
+-- compilate and run cpp file
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "cpp",
+	callback = function()
+		vim.api.nvim_set_keymap(
+			"n",
+			"<leader>r",
+			":w | :belowright split | :resize 10 | :term cd %:p:h && g++ -std=c++20 -o %:t:r % && ./%:t:r<CR>i",
+			{ noremap = true, silent = true }
+		)
+	end,
+})
